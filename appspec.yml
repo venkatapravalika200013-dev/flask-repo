@@ -1,18 +1,23 @@
 version: 0.0
 os: linux
+
 files:
   - source: flask_api.zip
     destination: /home/ec2-user/app
+
 hooks:
   BeforeInstall:
     - location: scripts/stop_service.sh
       runas: ec2-user
+
   AfterInstall:
     - location: scripts/install_deps.sh
       runas: ec2-user
+
   ApplicationStart:
     - location: scripts/start_service.sh
       runas: ec2-user
+
   ValidateService:
     - location: scripts/health_check.sh
       runas: ec2-user
